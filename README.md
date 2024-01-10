@@ -1,2 +1,1 @@
-# alx-backend-user-data
-backend, regex, bcrypt
+Backend specifications of handling user data, PII and non PII etc..
