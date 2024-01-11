@@ -17,7 +17,8 @@ def filter_datum(fields, redaction, message, separator):
     res = re.search(r'.$', message)
     my_dict = {}
 
-    delimeter = res.group() if res else None
+    # delimeter = res.group() if res else None
+    delimeter = separator
 
     if delimeter:
         something = message.split(delimeter)
