@@ -38,5 +38,4 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """Filters values in incoming log records """
         word = super(RedactingFormatter, self).format(record)
-        mod = filters(self.fields, self.REDACTION, word, self.SEPARATOR)
-        return mod
+        return filters(self.fields, self.REDACTION, word, self.SEPARATOR)
