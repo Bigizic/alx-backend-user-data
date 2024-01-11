@@ -3,6 +3,7 @@
 """
 
 import logging
+import os
 import re
 from typing import List
 
@@ -36,6 +37,19 @@ def get_logger() -> logging.Logger:
     logger.propagate = False
     logger.addHandler(stream_handler)
     return logger
+
+
+def get_db() -> mysql.connector.connection.MySQLConnection:
+    """ returns a connector to the database
+    """
+    user = os.getenv('PERSONAL_DATA_DB_USERNAME', 'root')
+    host = os.getenv('PERSONAL_DATA_DB_HOST', 'localhost')
+    pwd = os.getenv('PERSONAL_DATA_DB_PASSWORD', '')
+    db = os.getenv('PERSONAL_DATA_DB_NAME', '')
+
+    return mysql.connector.connect(
+            host=host, port=3306,
+            user=user, password=pwd, database=db)
 
 
 class RedactingFormatter(logging.Formatter):
