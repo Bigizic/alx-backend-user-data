@@ -7,6 +7,9 @@ import re
 from typing import List
 
 
+PII_FIELDS = ("name", "email", "phone", "ssn", "password")
+
+
 def filters(fields: List[str], redaction: str, message: str,
             separator: str) -> str:
     """Filter values in the log message based on specified fields"""
@@ -21,6 +24,18 @@ def filter_datum(fields: List[str], redaction: str, message: str,
     return re.sub(r'(\b(?:{}))=(.*?)(?={}|$)'.format('|'.join(fields),
                   re.escape(separator)), lambda match: match.group(1)
                   + '=' + redaction, message)
+
+
+def get_logger() -> logging.Logger:
+    """returns a logging.Logger object
+    """
+    logger = logging.getLogger("user_data")
+    stream_handler = logging.StreamHandler()
+    stream_handler.setFormatter(RedactingFormatter(PII_FIELDS))
+    logger.setLevel(logging.INFO)
+    logger.propagate = False
+    logger.addHandler(stream_handler)
+    return logger
 
 
 class RedactingFormatter(logging.Formatter):
