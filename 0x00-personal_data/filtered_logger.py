@@ -19,7 +19,7 @@ def filter_datum(fields: List[str], redaction: str, message: str,
                  separator: str) -> str:
     """ uses regex to replace occurences of certain fled values """
     return re.sub(r'(\b(?:{}))=(.*?)(?={}|$)'.format('|'.join(fields),
-                  re.escape(separator)), lambda match: ' ' + match.group(1)
+                  re.escape(separator)), lambda match: match.group(1)
                   + '=' + redaction, message)
 
 
@@ -38,5 +38,5 @@ class RedactingFormatter(logging.Formatter):
     def format(self, record: logging.LogRecord) -> str:
         """Filters values in incoming log records """
         word = super(RedactingFormatter, self).format(record)
-        mod = filter_datum(self.fields, self.REDACTION, word, self.SEPARATOR)
+        mod = filters(self.fields, self.REDACTION, word, self.SEPARATOR)
         return mod
