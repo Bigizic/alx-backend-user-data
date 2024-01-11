@@ -31,4 +31,5 @@ class RedactingFormatter(logging.Formatter):
         """Filters values in incoming log records
         """
         word = super(RedactingFormatter, self).format(record)
-        return filter_datum(self.fields, self.REDACTION, word, self.SEPARATOR)
+        res = filter_datum(self.fields, self.REDACTION, word, self.SEPARATOR)
+        return res
