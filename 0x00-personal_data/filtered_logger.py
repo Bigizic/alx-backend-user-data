@@ -25,7 +25,7 @@ class RedactingFormatter(logging.Formatter):
 
     def __init__(self, fields: list[str]):
         super(RedactingFormatter, self).__init__(self.FORMAT)
-        self.fields = list(fields)
+        self.fields = fields
 
     def format(self, record: logging.LogRecord) -> str:
         """Filters values in incoming log records
