@@ -53,6 +53,26 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
             user=d_user, password=d_pwd, database=db)
 
 
+def main() -> None:
+    """ retrieve all rows in the users table
+    """
+    conn = get_db()
+    pii_fields = "name,email,phone,ssn,password,ip,last_login,user_agent"
+    col = pii_fields.split(',')
+    query = f'SELECT {pii_fields} FROM USERS;'
+    info_logger = get_logger()
+
+    with conn.cursor() as cursor:
+        cursor.execute(query)
+        rows = cursor.fetchall()
+        for r in rows:
+            data = map(lambda x: '{}={}'.format(x[0], x[1]), zip(col, r))
+            word = '{};'.format('; '.join(list(data)))
+            i = ('user_data', logging.INFO, None, None, word, None, None)
+            log_record = logging.LogRecord(*i)
+            info_logger.handle(log_record)
+
+
 class RedactingFormatter(logging.Formatter):
     """ Redacting Formatter class
     """
@@ -69,3 +89,7 @@ class RedactingFormatter(logging.Formatter):
         """Filters values in incoming log records """
         word = super(RedactingFormatter, self).format(record)
         return filters(self.fields, self.REDACTION, word, self.SEPARATOR)
+
+
+if __name__ == '__main__':
+    main()
