@@ -26,10 +26,10 @@ def stats() -> str:
     return jsonify(stats)
 
 
-@app_views.route('/unauthorized', methods=['GET'])
+@app_views.route('/unauthorized', methods=['GET'], strict_slashes=False)
 def request_unauthorized() -> str:
     """ GET /api/vi/unauthorized
     Raise:
         - 401 error by using abort
     """
-    return abort(401, description="Resource not found")
+    abort(401)
