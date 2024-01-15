@@ -32,4 +32,4 @@ def request_unauthorized() -> str:
     Raise:
         - 401 error by using abort
     """
-    abort(401)
+    abort(401, description="Resource not found")
