@@ -11,7 +11,15 @@ import os
 
 app = Flask(__name__)
 app.register_blueprint(app_views)
+app.url_map.strict_slashes = False
 CORS(app, resources={r"/api/v1/*": {"origins": "*"}})
+
+
+@app.errorhandler(401)
+def request_unauthorized(error) -> str:
+    """ request unauthorized eror
+    """
+    return jsonify({"error": "Unauthorized"}), 401
 
 
 @app.errorhandler(404)
