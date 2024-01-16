@@ -19,8 +19,6 @@ class Auth():
         """
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
             return True
-        if path not in excluded_paths:
-            return True
 
         new_path = path[-1]
         if new_path != '/':
@@ -28,7 +26,16 @@ class Auth():
         else:
             new_path = path
 
-        if new_path in excluded_paths:
+        new_exe_paths = []
+        for items in excluded_paths:
+            if items[-1] != '/':
+                items += '/'
+                new_exe_paths.append(items)
+            else:
+                new_exe_paths.append(items)
+
+
+        if new_path in new_exe_paths:
             return False
 
         return True
