@@ -20,6 +20,17 @@ class Auth():
         if path is None or excluded_paths is None or len(excluded_paths) == 0:
             return True
 
+        # extra checks
+        all_ = []
+        for _ in excluded_paths:
+            all_.append(_.split('/')[3])
+
+        we = path.split('/')[3]
+        for _ in all_:
+            fr = _[:-1]
+            if we[:len(fr)] == fr:
+                return False
+
         new_path = path[-1]
         if new_path != '/':
             new_path = path + '/'
