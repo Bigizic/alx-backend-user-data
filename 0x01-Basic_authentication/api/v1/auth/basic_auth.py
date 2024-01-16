@@ -9,4 +9,18 @@ from api.v1.auth.auth import Auth
 class BasicAuth(Auth):
     """Implementation
     """
-    pass
+
+    def extract_base64_authorization_header(
+                                            self,
+                                            authorization_header: str
+                                            ) -> str:
+        """
+        Return:
+            - Base64 part of the Authorization header for a BasicAuthentication
+        """
+        auh = authorization_header
+        if auth is None or not isinstance(auh, str):
+            return None
+        if auh.split(' ')[0] == 'Basic' and auh.split(' ')[1]:
+            return auth.split(' ')[1]
+        return None
