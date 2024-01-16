@@ -60,14 +60,11 @@ class BasicAuth(Auth):
         data = str(data)
 
         if data.find(':') > 0:
-            data = data.replace(':', ' ')
-            if len(data.split(' ')) > 2:
-                data = data.split(' ')
-                word = ''
-                for _ in data[1:]:
-                    word += _
-                return (data[0], word)
-            return (data.split(' ')[0], data.split(' ')[1])
+            dta = data.replace(':', ' ')
+            if len(data.split(':')) > 2:
+                one = data.split(':')[0]
+                return (one, data[len(one) + 1:])
+            return (dta.split(' ')[0], dta.split(' ')[1])
         return (None, None)
 
     def user_object_from_credentials(
