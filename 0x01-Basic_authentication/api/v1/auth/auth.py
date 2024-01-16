@@ -8,6 +8,7 @@ from flask import request
 
 class Auth():
     """Auth class
+    This class is the template for all authentication system
     """
 
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
@@ -22,11 +23,11 @@ class Auth():
         Return:
             - None - request (will be the Flask request object)
         """
-        return request
+        return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """
         Return:
             - None - request (will be the Flask request object)
         """
-        return request
+        return None
