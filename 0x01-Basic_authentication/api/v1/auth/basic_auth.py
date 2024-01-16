@@ -61,6 +61,12 @@ class BasicAuth(Auth):
 
         if data.find(':') > 0:
             data = data.replace(':', ' ')
+            if len(data) > 1:
+                data = data.split(' ')
+                word = ''
+                for _ in data[1:]:
+                    word += _
+                return (data[0], word)
             return (data.split(' ')[0], data.split(' ')[1])
         return (None, None)
 
