@@ -24,7 +24,7 @@ if auth_type:
 
 
 @app.before_request
-def handler() -> None:
+def handler():
     """ Filters each request
     """
     path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
