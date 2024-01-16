@@ -2,9 +2,10 @@
 """A subclass of Auth
 """
 
+from api.v1.auth.auth import Auth
 import base64
 from flask import request
-from api.v1.auth.auth import Auth
+from models.user import User
 
 
 class BasicAuth(Auth):
@@ -61,3 +62,25 @@ class BasicAuth(Auth):
             data = data.replace(':', ' ')
             return (data.split(' ')[0], data.split(' ')[1])
         return (None, None)
+
+    def user_object_from_credentials(
+                                     self,
+                                     user_email: str,
+                                     user_pwd: str
+                                     ) -> TypeVar('User'):
+        """Return
+            - the User instance based on his email and password
+        """
+        e = isinstance(user_email, str)
+        p = isinstance(user_pwd, str)
+        if user_email is None or user_pwd is None or not e or not p:
+            return None
+        user_instance = User()
+        try:
+            data = user_instance.search({'email': user_email})
+        except Exception:
+            return None
+        if len(data) <= 0:
+            return None
+        if data[0].is_valid_password(user_pwd):
+            return data[0]
