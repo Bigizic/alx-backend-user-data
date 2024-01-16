@@ -34,7 +34,6 @@ class Auth():
             else:
                 new_exe_paths.append(items)
 
-
         if new_path in new_exe_paths:
             return False
 
