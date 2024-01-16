@@ -22,5 +22,5 @@ class BasicAuth(Auth):
         if auth is None or not isinstance(auh, str):
             return None
         if auh.split(' ')[0] == 'Basic' and auh.split(' ')[1]:
-            return auth.split(' ')[1]
+            return auh.split(' ')[1]
         return None
