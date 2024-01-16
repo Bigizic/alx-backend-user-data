@@ -19,7 +19,7 @@ class BasicAuth(Auth):
             - Base64 part of the Authorization header for a BasicAuthentication
         """
         auh = authorization_header
-        if auth is None or not isinstance(auh, str):
+        if auh is None or not isinstance(auh, str):
             return None
         if auh.split(' ')[0] == 'Basic' and auh.split(' ')[1]:
             return auh.split(' ')[1]
