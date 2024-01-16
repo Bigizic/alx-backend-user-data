@@ -34,10 +34,13 @@ def handler() -> None:
     if auth is None:
         return
 
-    if request.path not in path and auth.require_auth(request.path, path):
-        if auth.authorization_header(request) is None:
+    if not auth.require_auth(request.path, path):
+        return
+
+    if auth.authorization_header(request) is None:
             abort(401)
-        if auth.current_user(request) is None:
+
+    if auth.current_user(request) is None:
             abort(403)
 
 
