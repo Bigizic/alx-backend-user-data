@@ -25,6 +25,9 @@ if auth_type:
         auth = BasicAuth()
     elif auth_type == 'session_auth':
         auth = SessionAuth()
+    elif auth_type == 'session_exp_auth':
+        from api.v1.auth.session_exp_auth import SessionExpAuth
+        auth = SessionExpAuth()
     else:
         from api.v1.auth.auth import Auth
         auth = Auth()
