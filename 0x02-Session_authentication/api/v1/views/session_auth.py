@@ -15,13 +15,13 @@ def auth_session_login():
     """Implementation
     """
     email = request.form.get('email')
+    pwd = request.form.get('password')
 
-    if email is None or len(email.strip()) == 0:
+    if email is None:
         return jsonify({'error': "email missing"}), 400
 
-    pwd = request.form.get('password')
-    if pwd is None or len(pwd.strip()) == 0:
-        return jsonfiy({'error': "password missing"}), 401
+    if pwd is None:
+        return jsonify({'error': "password missing"}), 400
 
     user = User()
     data = user.search({'email': email})
