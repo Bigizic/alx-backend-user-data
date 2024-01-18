@@ -3,7 +3,8 @@
 """
 
 from api.v1.auth.auth import Auth
-from flask import session
+from flask import session, current_app
+import logging
 from models.user import User
 import uuid
 
@@ -50,9 +51,9 @@ class SessionAuth(Auth):
         re = self.session_cookie(request)
         if re is None:
             return False
-        session_id = self.user_id_for_session_id(str(re))
-        if session_id is None:
+        user_id = self.user_id_for_session_id(str(re))
+        if user_id is None:
             return False
-        if session_id in self.user_id_by_session_id:
-            del self.user_id_by_session_id[session_id]
+        if user_id in self.user_id_by_session_id.values():
+            del self.user_id_by_session_id[re]
         return True
