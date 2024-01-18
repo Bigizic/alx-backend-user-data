@@ -29,7 +29,7 @@ def auth_session_login() -> Tuple[str, int]:
         ps = data[0].is_valid_password(pwd)
         if ps:
             from api.v1.app import auth
-            user_s = auth.create_session(getattr(data[0], id))
+            user_s = auth.create_session(getattr(data[0], 'id'))
             res = jsonify(data[0].to_json())
             res.set_cookie(environ.get('SESSION_NAME'), user_s)
             return res
