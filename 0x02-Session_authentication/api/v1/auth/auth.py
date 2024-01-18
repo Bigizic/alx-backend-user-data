@@ -72,5 +72,5 @@ class Auth():
             - a cookie value from a request
         """
         if request:
-            return os.environ.get('SESSION_NAME')
+            return request.cookies.get(os.environ.get('SESSION_NAME'))
         return None
