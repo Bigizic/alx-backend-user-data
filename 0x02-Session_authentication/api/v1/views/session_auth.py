@@ -33,5 +33,5 @@ def auth_session_login() -> Tuple[str, int]:
             res = jsonify(data[0].to_json())
             res.set_cookie(environ.get('SESSION_NAME'), user_s)
             return res
-        return jsonify({'error': "wrong_password"}), 401
+        return jsonify({'error': "wrong password"}), 401
     return jsonify({'error': "no user found for this email"}), 404
