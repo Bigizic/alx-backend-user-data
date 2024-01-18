@@ -3,14 +3,15 @@
 """
 
 from api.v1.views import app_views
-from flask import request
+from flask import request, jsonify
 from models.user import User
 from os import environ
+from typing import Tuple
 
 
 @app_views.route('/auth_session/login', methods=['GET', 'POST'],
                  strict_slashes=False)
-def auth_session_login():
+def auth_session_login() -> Tuple[str, int]:
     """Implementation
     """
     email = request.form.get('email')
