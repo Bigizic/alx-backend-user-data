@@ -15,10 +15,11 @@ def auth_session_login() -> Tuple[str, int]:
     """Implementation
     """
     email = request.form.get('email')
-    pwd = request.form.get('password')
 
     if email is None or len(email.strip()) == 0:
         return jsonify({'error': "email missing"}), 400
+
+    pwd = request.form.get('password')
     if pwd is None or len(pwd.strip()) == 0:
         return jsonfiy({'error': "password missing"}), 400
 
