@@ -17,7 +17,7 @@ def auth_session_login():
     email = request.form.get('email')
 
     if email is None or len(email.strip()) == 0:
-        return jsonify({'error': "email missing"}), 400
+        return jsonify({'error': "email missing"}), 401
 
     pwd = request.form.get('password')
     if pwd is None or len(pwd.strip()) == 0:
