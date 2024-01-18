@@ -2,7 +2,7 @@
 """ Session authentication module a subclass of Auth
 """
 
-from api.v1.auth.auth import Auth
+from .auth import Auth
 from flask import session, current_app
 import logging
 from models.user import User
@@ -56,4 +56,4 @@ class SessionAuth(Auth):
             return False
         if user_id in self.user_id_by_session_id.values():
             del self.user_id_by_session_id[re]
-        return True
+            return True
