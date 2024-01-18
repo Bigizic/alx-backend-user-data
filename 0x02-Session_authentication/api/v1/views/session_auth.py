@@ -19,7 +19,7 @@ def auth_session_login() -> Tuple[str, int]:
 
     if email is None:
         return jsonify({'error': "email missing"}), 400
-    if password is None:
+    if pwd is None:
         return jsonfiy({'error': "password missing"}), 400
     user = User()
     data = user.search({'email': email})
