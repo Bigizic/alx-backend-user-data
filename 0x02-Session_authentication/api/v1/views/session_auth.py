@@ -46,7 +46,7 @@ def auth_session_login():
 def auth_session_logout():
     """Implementation
     """
-    from api.v1.auth import auth
+    from api.v1.app import auth
     ps = auth.destroy_session(request)
     if not ps:
         abort(404)
