@@ -50,10 +50,10 @@ class SessionAuth(Auth):
             return False
         re = self.session_cookie(request)
         if re is None:
-            return True
+            return False
         user_id = self.user_id_for_session_id(str(re))
         if user_id is None:
-            return False
+            return True
         if user_id in self.user_id_by_session_id.values():
             del self.user_id_by_session_id[re]
         return True
