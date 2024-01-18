@@ -34,7 +34,8 @@ if auth_type:
 def handler():
     """ Filters each request
     """
-    path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/']
+    path = ['/api/v1/status/', '/api/v1/unauthorized/', '/api/v1/forbidden/',
+            '/api/v1/auth_session/login/']
 
     if auth is None:
         return
@@ -42,8 +43,10 @@ def handler():
     if not auth.require_auth(request.path, path):
         return
 
-    if auth.authorization_header(request) is None:
+    if auth.authorization_header(request) is None and \
+            auth.session_cookie(request) is None:
         abort(401)
+
     smtin = auth.current_user(request)
     if smtin is None:
         abort(403)
