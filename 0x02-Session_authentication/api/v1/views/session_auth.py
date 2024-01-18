@@ -9,7 +9,7 @@ from os import environ
 from typing import Tuple
 
 
-@app_views.route('/auth_session/login', methods=['GET', 'POST'],
+@app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
 def auth_session_login() -> Tuple[str, int]:
     """Implementation
