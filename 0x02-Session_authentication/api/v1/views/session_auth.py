@@ -49,5 +49,5 @@ def auth_session_logout():
     from api.v1.app import auth
     ps = auth.destroy_session(request)
     if ps:
-        return jsonify({}) 200
+        return jsonify({}), 200
     abort(404)
