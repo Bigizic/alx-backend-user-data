@@ -3,7 +3,7 @@
 """
 
 from api.v1.views import app_views
-from flask import request, jsonify
+from flask import request, jsonify, abort
 from models.user import User
 from os import environ
 from typing import Tuple
@@ -39,3 +39,14 @@ def auth_session_login():
             return res
         return jsonify({'error': "wrong password"}), 401
     return jsonify({'error': "no user found for this email"}), 404
+
+@app_views.route('/auth_session/logout', methods=['DELETE'],
+                 strict_slashes=False)
+def auth_session_logout():
+    """Implementation
+    """
+    from api.v1.auth import auth
+    ps = auth.destroy_session(request)
+    if ps:
+        return jsonify({}), 200
+    abort(404)
