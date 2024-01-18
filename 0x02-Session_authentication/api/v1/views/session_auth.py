@@ -11,7 +11,7 @@ from typing import Tuple
 
 @app_views.route('/auth_session/login', methods=['POST'],
                  strict_slashes=False)
-def auth_session_login() -> Tuple[str, int]:
+def auth_session_login():
     """Implementation
     """
     email = request.form.get('email')
