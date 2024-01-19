@@ -42,7 +42,7 @@ class SessionExpAuth(SessionAuth):
         if ps is None or ps.get('created_at') is None:
             return None
         if self.session_duration <= 0:
-            return ps
+            return ps.get('user_id')
         span = timedelta(seconds=self.session_duration)
         if (ps.get('created_at') + span) < datetime.now():
             return None
