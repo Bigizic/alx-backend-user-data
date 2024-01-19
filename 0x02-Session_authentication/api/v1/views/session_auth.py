@@ -48,4 +48,4 @@ def auth_session_logout() -> str:
     """Implementation
     """
     ps = auth.destroy_session(request)
-    return {} if ps else abort(403)
+    return {} if ps else abort(404)
