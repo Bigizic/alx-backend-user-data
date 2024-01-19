@@ -44,8 +44,8 @@ def auth_session_login():
 
 @app_views.route('/auth_session/logout', methods=['DELETE'],
                  strict_slashes=False)
-def auth_session_logout() -> str:
+def auth_session_logout():
     """Implementation
     """
     ps = auth.destroy_session(request)
-    return {} if ps else abort(404)
+    return jsonify({}), 200 if ps else abort(404)
