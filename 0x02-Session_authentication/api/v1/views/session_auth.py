@@ -2,7 +2,6 @@
 """New Flask view that handles all routes for the Session Authy
 """
 
-from api.v1.app import auth
 from api.v1.views import app_views
 from flask import request, jsonify, abort
 from models.user import User
@@ -48,4 +47,4 @@ def auth_session_logout():
     """Implementation
     """
     ps = auth.destroy_session(request)
-    return jsonify({}), 200 if ps else abort(404)
+    return jsonify({}), 200 if ps else abort(401)
