@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""DB module.
+"""Implementation
 """
 from sqlalchemy import create_engine, tuple_
 from sqlalchemy.exc import InvalidRequestError
