@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
 """ DB Engine
 """
-
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
 from sqlalchemy.orm.exc import NoResultFound
 from sqlalchemy.exc import InvalidRequestError
+from user import User
 
-from user import Base, User
+from user import Base
 
 
 class DB:
