@@ -36,10 +36,12 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Implementation
         """
-        new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
-        self._session.commit()
-        return new_user
+        if email and hashed_password:
+            new_user = User(email=email, hashed_password=hashed_password)
+            self._session.add(new_user)
+            self._session.commit()
+            return new_user
+        return None
 
     def find_user_by(self, **kwargs) -> User:
         """Locates a user based on arbitrary keywords
