@@ -1,4 +1,4 @@
-#!/usr/bin/env pyhon3
+#!/usr/bin/env python3
 """ a SQLAlchemy model named User
 """
 
