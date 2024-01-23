@@ -6,9 +6,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm.session import Session
-from user import User
+from sqlalchemy.orm.exc import NoResultFound
+from sqlalchemy.exc import InvalidRequestError
 
-from user import Base
+from user import Base, User
 
 
 class DB:
@@ -46,3 +47,16 @@ class DB:
         new_user.hashed_password = hashed_password
         self.save(new_user)
         return new_user
+
+    def find_user_by(self, **kwargs) -> User:
+        """Locates a user based on arbitrary keywords
+        Return:
+            - First fow found in the users table
+        """
+        try:
+            query = self._session.query(User).filter_by(**kwargs).first()
+            if query is None:
+                raise NoResultFound
+            return query
+        except InvalidRequestError as e:
+            raise e
