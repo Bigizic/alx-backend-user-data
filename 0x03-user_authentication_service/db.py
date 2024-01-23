@@ -43,9 +43,7 @@ class DB:
         """Implementation
         """
         try:
-            new_user = User()
-            new_user.email = email
-            new_user.hashed_password = hashed_password
+            new_user = User(email=email, hashed_password=hashed_password)
             self.__session.add(new_user)
             self.__session.commit()
         except Exception as e:
