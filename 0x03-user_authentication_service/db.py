@@ -42,10 +42,14 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Implementation
         """
-        new_user = User()
-        new_user.email = email
-        new_user.hashed_password = hashed_password
-        self.save(new_user)
+        try:
+            new_user = User()
+            new_user.email = email
+            new_user.hashed_password = hashed_password
+            self.save(new_user)
+        except Exception as e:
+            self.__session.rollback()
+            new_user = None
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
