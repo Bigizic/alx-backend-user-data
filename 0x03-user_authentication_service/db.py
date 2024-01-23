@@ -60,3 +60,24 @@ class DB:
             return query
         except InvalidRequestError as e:
             raise e
+
+    def update_user(self, user_id, **kwargs):
+        """Updates a user based on user_id
+        """
+        try:
+            find_user = self.find_user_by(id=user_id)
+            if find_user:
+                attributes = ["id",
+                              "email",
+                              "hashed_password",
+                              "session_id",
+                              "reset_token"]
+
+                for k, v in kwargs.items():
+                    if k in attributes:
+                        find_user.k = v
+                        self.save(find_user)
+                    else:
+                        raise ValueError
+        except ValueError as e:
+            raise e
