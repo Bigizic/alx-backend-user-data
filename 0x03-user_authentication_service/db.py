@@ -41,7 +41,9 @@ class DB:
     def add_user(self, email: str, hashed_password: str) -> User:
         """Adds a new user to the database.
         """
-        new_user = User(email=email, hashed_password=hashed_password)
+        new_user = User()
+        new_user.email = email
+        new_user.hashed_password = hashed_password
         self.save(new_user)
         return new_user
 
