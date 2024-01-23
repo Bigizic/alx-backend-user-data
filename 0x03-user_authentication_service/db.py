@@ -33,22 +33,12 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def save(self, obj) -> None:
-        """Commits to databse
-        """
-        self._session.add(obj)
-        self._session.commit()
-
     def add_user(self, email: str, hashed_password: str) -> User:
         """Implementation
         """
-        try:
-            new_user = User(email=email, hashed_password=hashed_password)
-            self._session.add(new_user)
-            self._session.commit()
-        except Exception as e:
-            self._session.rollback()
-            new_user = None
+        new_user = User(email=email, hashed_password=hashed_password)
+        self._session.add(new_user)
+        self._session.commit()
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
