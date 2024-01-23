@@ -44,10 +44,10 @@ class DB:
         """
         try:
             new_user = User(email=email, hashed_password=hashed_password)
-            self.__session.add(new_user)
-            self.__session.commit()
+            self._session.add(new_user)
+            self._session.commit()
         except Exception as e:
-            self.__session.rollback()
+            self._session.rollback()
             new_user = None
         return new_user
 
