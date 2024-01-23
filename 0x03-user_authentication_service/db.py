@@ -42,8 +42,7 @@ class DB:
         """Adds a new user to the database.
         """
         new_user = User(email=email, hashed_password=hashed_password)
-        self._session.add(new_user)
-        self._session.commit()
+        self.save(new_user)
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
