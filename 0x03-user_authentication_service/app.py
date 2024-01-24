@@ -95,7 +95,7 @@ def update_password():
 
     try:
         updated_user = AUTH.update_password(rst, pwd)
-        if updated_user is None:
+        if updated_user:
             return jsonify({
                     'email': email,
                     'message': "Password updated"
