@@ -17,7 +17,7 @@ def basic_flask_app() -> jsonify:
 
 
 @app.route('/users', methods=["POST"])
-def register_user():
+def register_user() -> jsonify:
     """Registers a user
     """
     email = request.form.get('email')
