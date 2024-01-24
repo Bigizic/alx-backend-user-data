@@ -3,7 +3,7 @@
 """
 
 from auth import Auth
-from flask import abort, Flask, jsonify, redirect, request, url_for
+from flask import abort, Flask, jsonify, redirect, request
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -54,7 +54,7 @@ def logout():
     validate_user = AUTH.get_user_from_session_id(key)
     if validate_user:
         AUTH.destroy_session(validate_user.id)
-        return redirect(url_for('app.basic_flask_app'))
+        return redirect('/')
     abort(403)
 
 
