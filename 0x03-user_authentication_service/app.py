@@ -6,10 +6,11 @@ from auth import Auth
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
+AUTH = AUTH()
 
 
-@app.route('/')
-def basic_flask_app():
+@app.route('/', strict_slashes=False)
+def basic_flask_app() -> str:
     """Implementation
     """
     return jsonify({"message": "Bienvenue"})
@@ -19,7 +20,6 @@ def basic_flask_app():
 def register_user():
     """Registers a user
     """
-    AUTH = Auth()
     email = request.form.get('email')
     pwd = request.form.get('password')
 
