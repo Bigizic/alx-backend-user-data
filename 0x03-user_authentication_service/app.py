@@ -4,6 +4,7 @@
 
 from auth import Auth
 from flask import abort, Flask, jsonify, redirect, request
+from typing import Union
 
 app = Flask(__name__)
 AUTH = Auth()
@@ -55,6 +56,20 @@ def logout():
     if validate_user:
         AUTH.destroy_session(validate_user.id)
         return redirect('/')
+    abort(403)
+
+
+@app.route('/profile', methods=["GET"], strict_slashes=False)
+def user_profile() -> Union[jsonify, abort]:
+    """Handles user profile
+    Return:
+        - <jsonify object> if user object exist
+        - abort 403
+    """
+    key = request.cookies.get('session_id')
+    validate_user = AUTH.get_user_from_session_id(key)
+    if validate_user:
+        return jsonify({'email': validate_user.email}), 200
     abort(403)
 
 
