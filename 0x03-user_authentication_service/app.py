@@ -46,7 +46,7 @@ def login():
     abort(401)
 
 
-@app.route('/sessions', methods=["DELETE"])
+@app.route('/sessions', methods=["DELETE"], strict_slashes=False)
 def logout():
     """Handles user log out
     """
@@ -54,7 +54,7 @@ def logout():
     validate_user = AUTH.get_user_from_session_id(key)
     if validate_user:
         AUTH.destroy_session(validate_user.id)
-        return redirect(url_for('app.login'))
+        return redirect(url_for('app.basic_flask_app'))
     abort(403)
 
 
