@@ -1,4 +1,4 @@
-#!/usr/bin/env puython3
+#!/usr/bin/env python3
 """Basic Flask APP
 """
 
@@ -6,7 +6,7 @@ from auth import Auth
 from flask import Flask, jsonify, request
 
 app = Flask(__name__)
-AUTH = Auth()
+AUTH = Autwh()
 
 
 @app.route('/', methods=["GET"], strict_slashes=False)
