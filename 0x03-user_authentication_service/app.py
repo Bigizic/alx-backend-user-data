@@ -9,7 +9,7 @@ app = Flask(__name__)
 AUTH = AUTH()
 
 
-@app.route('/', strict_slashes=False)
+@app.route('/', methods=["GET"], strict_slashes=False)
 def basic_flask_app() -> str:
     """Implementation
     """
