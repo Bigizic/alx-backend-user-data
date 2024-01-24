@@ -14,6 +14,7 @@ def basic_flask_app():
     """
     return jsonify({"message": "Bienvenue"})
 
+
 @app.route('/users', methods=["POST"])
 def register_user():
     """Registers a user
