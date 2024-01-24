@@ -50,8 +50,7 @@ def login():
 def logout():
     """Handles user log out
     """
-
-    key = request.cookies['session_id']
+    key = request.cookies.get('session_id')
     if key:
         try:
             validate_user = AUTH.get_user_from_session_id(key)
