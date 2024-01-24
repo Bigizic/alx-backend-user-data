@@ -72,6 +72,19 @@ def user_profile() -> Union[jsonify, abort]:
         return jsonify({'email': validate_user.email}), 200
     abort(403)
 
+@app.route('/reset_password', methods=["POST"], strict_slashes=False)
+def get_reset_password_token():
+    """Resets user password
+    """
+    try:
+        email = request.form.get('email')
+        validate_user = AUTH.get_reset_password_token(email)
+        if validate_user:
+            return jsonify({'email': email, 'reset_token': validate_user})
+        abort(403)
+    except Exception as e:
+        abort(403)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port="5000")
