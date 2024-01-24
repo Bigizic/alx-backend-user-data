@@ -23,7 +23,7 @@ class Auth:
         """
         self._db = DB()
 
-    def register_user(self, email: str, password: str):
+    def register_user(self, email: str, password: str) -> User:
         """ Implementation
         """
         try:
