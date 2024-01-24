@@ -51,15 +51,10 @@ def logout():
     """Handles user log out
     """
     key = request.cookies.get('session_id')
-    if key:
-        try:
-            validate_user = AUTH.get_user_from_session_id(key)
-            if validate_user:
-                AUTH.destroy_session(validate_user.id)
-                return redirect(url_for('app.login'))
-            abort(403)
-        except Exception as e:
-            abort(403)
+    validate_user = AUTH.get_user_from_session_id(key)
+    if validate_user:
+        AUTH.destroy_session(validate_user.id)
+        return redirect(url_for('app.login'))
     abort(403)
 
 
