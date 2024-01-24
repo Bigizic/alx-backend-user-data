@@ -88,7 +88,7 @@ def get_reset_password_token():
 
 
 @app.route('/reset_password', methods=["PUT"], strict_slashes=False)
-def update_password():
+def update_password() -> jsonify:
     email = request.form.get('email')
     rst = request.form.get('reset_token')
     pwd = request.form.get('new_password')
