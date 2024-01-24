@@ -32,10 +32,14 @@ class DB:
             self.__session = DBSession()
         return self.__session
 
-    def save(self, obj):
-        """Saves in the database the object
+    def new(self, obj):
+        """Adds current object to database
         """
         self._session.add(obj)
+
+    def save(self):
+        """Saves in the database the object
+        """
         self._session.commit()
 
     def add_user(self, email: str, hashed_password: str) -> User:
@@ -44,7 +48,8 @@ class DB:
         new_user = User()
         new_user.email = email
         new_user.hashed_password = hashed_password
-        self.save(new_user)
+        self.new(new_user)
+        self.save()
         return new_user
 
     def find_user_by(self, **kwargs) -> User:
@@ -71,12 +76,15 @@ class DB:
                               "hashed_password",
                               "session_id",
                               "reset_token"]
-
-                for k, v in kwargs.items():
-                    if k in attributes:
+                valid_records = {
+                        x: v for x, v in kwargs.items() if x in attributes
+                }
+                if valid_records:
+                    for k, v in valid_records.items():
                         find_user.k = v
-                        self.save(find_user)
-                    else:
-                        raise ValueError
+                        self.save()
+                else:
+                    raise ValueError
+                return None
         except ValueError as e:
             raise e
